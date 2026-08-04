@@ -43,57 +43,38 @@ def rerank_cross_encoder(
     load_dotenv()
 
     jina_api_key = os.getenv("JINA_API_KEY")
-    if jina_api_key:
-        try:
-            # Gọi Jina Reranker API
-            documents = [c["content"] for c in candidates]
-            response = requests.post(
-                "https://api.jina.ai/v1/rerank",
-                headers={"Authorization": f"Bearer {jina_api_key}"},
-                json={
-                    "model": "jina-reranker-v2-base-multilingual",
-                    "query": query,
-                    "documents": documents,
-                    "top_n": top_k
-                },
-                timeout=10
-            )
-            if response.status_code == 200:
-                results_data = response.json().get("results", [])
-                reranked = []
-                for res in results_data:
-                    idx = res["index"]
-                    score = res["relevance_score"]
-                    item = candidates[idx].copy()
-                    item["score"] = float(round(score, 4))
-                    reranked.append(item)
-                
-                # Jina trả về kết quả đã được sắp xếp sẵn, nhưng ta vẫn sort lại cho chắc chắn
-                reranked.sort(key=lambda x: x["score"], reverse=True)
-                return reranked[:top_k]
-            else:
-                print(f"Jina API returned status code {response.status_code}: {response.text}")
-        except Exception as e:
-            print(f"Jina Reranker error, falling back to other methods: {e}")
+    if not jina_api_key:
+        raise Exception("JINA_API_KEY not found. Fallback to RRF.")
 
     try:
-        from sentence_transformers import CrossEncoder
-        model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
-        pairs = [[query, c["content"]] for c in candidates]
-        scores = model.predict(pairs)
+        # Gọi Jina Reranker API
+        documents = [c["content"] for c in candidates]
+        response = requests.post(
+            "https://api.jina.ai/v1/rerank",
+            headers={"Authorization": f"Bearer {jina_api_key}"},
+            json={
+                "model": "jina-reranker-v2-base-multilingual",
+                "query": query,
+                "documents": documents,
+                "top_n": top_k
+            },
+            timeout=10
+        )
+        response.raise_for_status()
         
+        results_data = response.json().get("results", [])
         reranked = []
-        for cand, score in zip(candidates, scores):
-            item = cand.copy()
+        for res in results_data:
+            idx = res["index"]
+            score = res["relevance_score"]
+            item = candidates[idx].copy()
             item["score"] = float(round(score, 4))
             reranked.append(item)
-        
+            
         reranked.sort(key=lambda x: x["score"], reverse=True)
         return reranked[:top_k]
-    except Exception:
-        # Fallback về sắp xếp theo điểm hiện có
-        sorted_cands = sorted(candidates, key=lambda x: x.get("score", 0), reverse=True)
-        return sorted_cands[:top_k]
+    except Exception as e:
+        raise Exception(f"Jina API failed: {e}. Fallback to RRF.")
 
 
 def rerank_mmr(
@@ -204,7 +185,14 @@ def rerank(
         return rerank_mmr(query_emb, cands_list, top_k=top_k)
     elif method == "cross_encoder":
         cands_list = candidates[0] if candidates and isinstance(candidates[0], list) else candidates
-        return rerank_cross_encoder(query, cands_list, top_k=top_k)
+        try:
+            return rerank_cross_encoder(query, cands_list, top_k=top_k)
+        except Exception as e:
+            print(f"Lỗi khi chạy Cross-encoder: {e}. Đang fallback về RRF...")
+            if candidates and isinstance(candidates[0], list):
+                return rerank_rrf(candidates, top_k=top_k)
+            else:
+                return rerank_rrf([candidates], top_k=top_k)
     else:
         raise ValueError(f"Unknown rerank method: {method}")
 
