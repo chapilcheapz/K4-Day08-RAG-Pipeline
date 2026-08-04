@@ -37,6 +37,45 @@ def rerank_cross_encoder(
     if not candidates:
         return []
 
+    import os
+    import requests
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    jina_api_key = os.getenv("JINA_API_KEY")
+    if jina_api_key:
+        try:
+            # Gọi Jina Reranker API
+            documents = [c["content"] for c in candidates]
+            response = requests.post(
+                "https://api.jina.ai/v1/rerank",
+                headers={"Authorization": f"Bearer {jina_api_key}"},
+                json={
+                    "model": "jina-reranker-v2-base-multilingual",
+                    "query": query,
+                    "documents": documents,
+                    "top_n": top_k
+                },
+                timeout=10
+            )
+            if response.status_code == 200:
+                results_data = response.json().get("results", [])
+                reranked = []
+                for res in results_data:
+                    idx = res["index"]
+                    score = res["relevance_score"]
+                    item = candidates[idx].copy()
+                    item["score"] = float(round(score, 4))
+                    reranked.append(item)
+                
+                # Jina trả về kết quả đã được sắp xếp sẵn, nhưng ta vẫn sort lại cho chắc chắn
+                reranked.sort(key=lambda x: x["score"], reverse=True)
+                return reranked[:top_k]
+            else:
+                print(f"Jina API returned status code {response.status_code}: {response.text}")
+        except Exception as e:
+            print(f"Jina Reranker error, falling back to other methods: {e}")
+
     try:
         from sentence_transformers import CrossEncoder
         model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
@@ -180,8 +219,18 @@ if __name__ == "__main__":
         {"content": "Điểm chuẩn trúng tuyển các ngành Khoa học Máy tính 2025", "score": 9.5, "metadata": {"source": "hust.md"}},
         {"content": "Chính sách ưu tiên xét tuyển thẳng Đại học Bách khoa Hà Nội 2026", "score": 8.1, "metadata": {"source": "hust.md"}},
     ]
-    results = rerank("xét tuyển bách khoa", [list1, list2], top_k=2, method="rrf")
+    results_rrf = rerank("xét tuyển bách khoa", [list1, list2], top_k=2, method="rrf")
     print("✓ Output RRF Reranking:")
-    for r in results:
+    for r in results_rrf:
+        print(f"  [{r['score']:.5f}] {r['content']}")
+
+    # Test thử nghiệm Jina Reranker qua cross_encoder
+    candidates = [
+        {"content": "Chính sách ưu tiên xét tuyển thẳng Đại học Bách khoa Hà Nội 2026", "score": 0.85, "metadata": {"source": "hust.md"}},
+        {"content": "Điểm chuẩn trúng tuyển các ngành Khoa học Máy tính 2025", "score": 0.75, "metadata": {"source": "hust.md"}},
+    ]
+    results_cross = rerank("xét tuyển bách khoa", candidates, top_k=2, method="cross_encoder")
+    print("\n✓ Output Cross-Encoder Reranking (Jina Reranker API):")
+    for r in results_cross:
         print(f"  [{r['score']:.5f}] {r['content']}")
 
