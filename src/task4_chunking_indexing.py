@@ -77,10 +77,14 @@ def load_documents() -> list[dict]:
     for md_file in STANDARDIZED_DIR.rglob("*.md"):
         content = md_file.read_text(encoding="utf-8")
         if content.strip():
-            doc_type = "legal" if "legal" in str(md_file) else "news"
+            doc_type = "legal" if "legal" in str(md_file).lower() else "news"
             documents.append({
                 "content": content,
-                "metadata": {"source": md_file.name, "type": doc_type}
+                "metadata": {
+                    "source": md_file.name,
+                    "type": doc_type,
+                    "doc_type": doc_type
+                }
             })
     return documents
 
@@ -130,7 +134,7 @@ def embed_chunks(chunks: list[dict]) -> list[dict]:
 
 def index_to_vectorstore(chunks: list[dict]):
     """
-    Lưu chunks vào Vector Store (ChromaDB) và kiểm tra số lượng collection.count().
+    Lưu chunks vào Vector Store (ChromaDB) theo từng batch 100 chunks và kiểm tra collection.count().
     """
     import chromadb
 
@@ -141,13 +145,17 @@ def index_to_vectorstore(chunks: list[dict]):
         metadata={"hnsw:space": "cosine"},
     )
 
-    ids = [f"{c['metadata']['source']}_chunk_{c['metadata']['chunk_index']}" for c in chunks]
-    collection.upsert(
-        ids=ids,
-        documents=[c["content"] for c in chunks],
-        embeddings=[c["embedding"] for c in chunks],
-        metadatas=[c["metadata"] for c in chunks],
-    )
+    # Upsert theo batch (batch_size = 100) theo yêu cầu của Role 3
+    batch_size = 100
+    for i in range(0, len(chunks), batch_size):
+        batch = chunks[i:i + batch_size]
+        ids = [f"{c['metadata']['source']}_chunk_{c['metadata']['chunk_index']}" for c in batch]
+        collection.upsert(
+            ids=ids,
+            documents=[c["content"] for c in batch],
+            embeddings=[c["embedding"] for c in batch],
+            metadatas=[c["metadata"] for c in batch],
+        )
 
     count = collection.count()
     print(f"✓ Total chunks indexed in collection '{COLLECTION_NAME}': {count}")
