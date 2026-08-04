@@ -1,17 +1,102 @@
 [
   {
-    "question": "Người mua có thể yêu cầu trả hàng/hoàn tiền trong thời hạn bao lâu sau khi nhận hàng?",
-    "expected_answer": "Trong vòng 15 ngày kể từ khi giao hàng thành công (24 giờ đối với thực phẩm tươi sống/đông lạnh).",
-    "expected_context": "Trang Returns and Refunds Policy, mục Return/Refund Eligibility"
+    "question": "Phương thức xét tuyển thẳng của Đại học Bách khoa Hà Nội năm 2026 gồm những hình thức nào?",
+    "expected_answer": "Đại học Bách khoa Hà Nội xét tuyển thẳng theo quy định của Bộ GD&ĐT, xét tuyển tài năng gồm xét học sinh giỏi, chứng chỉ quốc tế (IELTS, SAT, ACT) và phỏng vấn.",
+    "expected_context": "Đề án tuyển sinh Đại học Bách Khoa Hà Nội 2026"
   },
   {
-    "question": "Shopee hỗ trợ những phương thức thanh toán nào?",
-    "expected_answer": "ShopeePay Wallet, thẻ tín dụng/ghi nợ, trả góp qua thẻ, QR Code, chuyển khoản qua app ngân hàng, thẻ NAPAS, Apple Pay, Google Pay, và COD.",
-    "expected_context": "Trang Payment Methods Overview"
+    "question": "Điểm chuẩn trúng tuyển ngành Khoa học Máy tính Đại học Bách khoa Hà Nội năm 2025 là bao nhiêu?",
+    "expected_answer": "Điểm chuẩn ngành Khoa học Máy tính (IT1) của ĐH Bách khoa Hà Nội ở mức rất cao, dao động từ 28.5 đến 29.42 điểm tùy theo phương thức thi.",
+    "expected_context": "Bảng điểm chuẩn Đại học Bách khoa Hà Nội năm 2025"
   },
   {
-    "question": "Người bán không được đăng bán những sản phẩm nào?",
-    "expected_answer": "Hàng giả/nhái, sản phẩm bất hợp pháp, vi phạm sở hữu trí tuệ, và các mặt hàng nằm trong danh sách cấm của sàn.",
-    "expected_context": "Trang Product Listing Regulations, mục Prohibited Content"
+    "question": "Trường Đại học Khoa học Tự nhiên - ĐHQGHN sử dụng các phương thức xét tuyển nào năm 2026?",
+    "expected_answer": "Trường ĐH KHTN sử dụng 6 phương thức: Xét tuyển thẳng, kết quả thi THPT, kết quả thi ĐGNL ĐHQGHN, chứng chỉ quốc tế, xét kết hợp học bạ và phỏng vấn.",
+    "expected_context": "Đề án tuyển sinh Trường ĐH Khoa học Tự nhiên 2026"
+  },
+  {
+    "question": "Yêu cầu mức điểm chứng chỉ IELTS để xét tuyển vào Đại học Ngoại thương là bao nhiêu?",
+    "expected_answer": "Thí sinh cần đạt chứng chỉ IELTS từ 6.5 trở lên kết hợp với điểm thi THPT hoặc điểm học bạ theo quy định đề án tuyển sinh ĐH Ngoại thương.",
+    "expected_context": "Thông tin tuyển sinh Đại học Ngoại thương FTU"
+  },
+  {
+    "question": "Học viện Công nghệ Bưu chính Viễn thông (PTIT) công bố phương thức tuyển sinh đại học chính quy 2026 như thế nào?",
+    "expected_answer": "PTIT xét tuyển dựa trên điểm thi THPT 2026, điểm thi ĐGNL của ĐHQGHN/ĐHQG-HCM, xét tuyển kết hợp chứng chỉ quốc tế và xét tuyển thẳng.",
+    "expected_context": "Thông tin tuyển sinh Học viện Công nghệ Bưu chính Viễn thông 2026"
+  },
+  {
+    "question": "Điểm chuẩn trúng tuyển cao nhất của Đại học Kinh tế Quốc dân năm 2025 là bao nhiêu?",
+    "expected_answer": "Đại học Kinh tế Quốc dân công bố điểm chuẩn cao nhất đạt 28.83 điểm đối với các ngành hot như Thương mại điện tử và Truyền thông marketing.",
+    "expected_context": "Thông báo điểm chuẩn Đại học Kinh tế Quốc dân 2025"
+  },
+  {
+    "question": "Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQGHN tuyển sinh những khối thi chính nào?",
+    "expected_answer": "Trường ĐH KHXH&NV tuyển sinh chủ yếu các tổ hợp khối C00, D01, D04, D14, D78 và các tổ hợp mở rộng theo quy chế tuyển sinh.",
+    "expected_context": "Thông tin tuyển sinh Trường ĐH KHXH&NV 2026"
+  },
+  {
+    "question": "Mức học phí dự kiến đối với sinh viên chính quy Đại học Bách khoa Hà Nội năm học 2026 là bao nhiêu?",
+    "expected_answer": "Học phí chương trình chuẩn dao động khoảng 24 - 30 triệu đồng/năm học, các chương trình chất lượng cao/tiên tiến dao động từ 35 - 60 triệu đồng/năm học.",
+    "expected_context": "Đề án tuyển sinh Đại học Bách khoa Hà Nội 2026, mục Học phí"
+  },
+  {
+    "question": "Quy định về cộng điểm ưu tiên đối tượng và khu vực trong tuyển sinh đại học 2026 được tính như thế nào?",
+    "expected_answer": "Thí sinh đạt tổng điểm từ 22.5 trở lên sẽ giảm dần điểm ưu tiên theo công thức của Bộ GD&ĐT: [(30 - Tổng điểm)/7.5] x Mức điểm ưu tiên quy định.",
+    "expected_context": "Quy chế tuyển sinh đại học chính quy của Bộ Giáo dục và Đào tạo"
+  },
+  {
+    "question": "Trường Đại học Phenikaa thông tin tuyển sinh đại học chính quy 2026 với các phương thức nào?",
+    "expected_answer": "Phenikaa xét tuyển thẳng, xét tuyển theo kết quả thi THPT 2026, xét học bạ THPT và xét tuyển theo kết quả thi đánh giá năng lực.",
+    "expected_context": "Thông tin tuyển sinh Đại học Phenikaa 2026"
+  },
+  {
+    "question": "Mã ngành tuyển sinh và chỉ tiêu ngành Công nghệ Thông tin tại Học viện Bưu chính Viễn thông là bao nhiêu?",
+    "expected_answer": "Ngành CNTT mã ngành 7480201 với tổng chỉ tiêu tuyển sinh khoảng 1100 sinh viên tại cơ sở phía Bắc.",
+    "expected_context": "Đề án tuyển sinh Học viện Công nghệ Bưu chính Viễn thông"
+  },
+  {
+    "question": "Điểm chuẩn phương thức đánh giá năng lực ĐHQGHN vào Trường ĐH Khoa học Tự nhiên năm 2025 là bao nhiêu?",
+    "expected_answer": "Điểm sàn trúng tuyển thi ĐGNL ĐHQGHN (HSA) vào các ngành KHTN dao động từ 80 đến 105 điểm trên thang điểm 150.",
+    "expected_context": "Thông báo điểm chuẩn ĐGNL Trường ĐH Khoa học Tự nhiên 2025"
+  },
+  {
+    "question": "Thời hạn đăng ký và điều chỉnh nguyện vọng xét tuyển đại học năm 2026 trên hệ thống chung của Bộ GD&ĐT?",
+    "expected_answer": "Thí sinh đăng ký và điều chỉnh nguyện vọng trực tuyến trên Hệ thống hỗ trợ tuyển sinh chung của Bộ GD&ĐT từ tháng 7 đến đầu tháng 8/2026.",
+    "expected_context": "Lịch trình tuyển sinh đại học chính quy năm 2026"
+  },
+  {
+    "question": "Hồ sơ xác nhận nhập học đại học chính quy 2026 bao gồm những giấy tờ gì?",
+    "expected_answer": "Bao gồm Giấy báo trúng tuyển, Bản gốc Giấy chứng nhận kết quả thi THPT 2026, Bằng tốt nghiệp THPT hoặc Giấy chứng nhận tốt nghiệp tạm thời, Học bạ và Căn cước công dân.",
+    "expected_context": "Quy định thủ tục xác nhận nhập học Đại học"
+  },
+  {
+    "question": "Chương trình đào tạo liên kết quốc tế của Đại học Ngoại thương tuyển sinh bằng phương thức nào?",
+    "expected_answer": "Xét tuyển kết hợp học bạ/điểm THPT với chứng chỉ tiếng Anh quốc tế (IELTS từ 5.5 hoặc TOEFL equivalent) và phỏng vấn cá nhân.",
+    "expected_context": "Thông tin tuyển sinh chương trình liên kết quốc tế FTU"
+  },
+  {
+    "question": "Sinh viên đạt giải Kỳ thi Học sinh giỏi Quốc gia được ưu tiên tuyển thẳng như thế nào?",
+    "expected_answer": "Thí sinh đạt giải Nhất, Nhì, Ba học sinh giỏi Quốc gia được xét tuyển thẳng vào các ngành đúng hoặc gần với môn đạt giải theo quy định của từng trường.",
+    "expected_context": "Quy chế xét tuyển thẳng Học sinh giỏi Quốc gia"
+  },
+  {
+    "question": "Trường Đại học Kinh tế Quốc dân quy định ngưỡng đảm bảo chất lượng đầu vào (điểm sàn) năm 2026 là bao nhiêu?",
+    "expected_answer": "Điểm sàn nhận hồ sơ xét tuyển theo kết quả thi THPT 2026 dự kiến là 20.0 điểm đối với tổng 3 môn xét tuyển.",
+    "expected_context": "Đề án tuyển sinh Đại học Kinh tế Quốc dân 2026"
+  },
+  {
+    "question": "Học phí ngành Y khoa và Dược học tại các trường đại học công lập tăng như thế nào?",
+    "expected_answer": "Học phí các ngành khối sức khỏe áp dụng theo Nghị định 97/2023/NĐ-CP với lộ trình tăng tối đa 10-15% mỗi năm học.",
+    "expected_context": "Nghị định quy định về cơ chế thu quản lý học phí giáo dục đại học"
+  },
+  {
+    "question": "Tổ hợp xét tuyển A00 và A01 gồm những môn thi nào?",
+    "expected_answer": "Tổ hợp A00 gồm Toán, Vật lý, Hóa học; Tổ hợp A01 gồm Toán, Vật lý, Tiếng Anh.",
+    "expected_context": "Danh mục các tổ hợp môn xét tuyển đại học"
+  },
+  {
+    "question": "Chính sách học bổng khuyến khích học tập dành cho tân sinh viên xuất sắc tại ĐH Bách Khoa Hà Nội?",
+    "expected_answer": "ĐH Bách Khoa cấp học bổng Tài năng, học bổng Trần Đại Nghĩa và học bổng Khuyến khích học tập với mức miễn 50% - 100% học phí cho tân sinh viên xuất sắc.",
+    "expected_context": "Chính sách học bổng và hỗ trợ sinh viên ĐH Bách Khoa Hà Nội"
   }
 ]
